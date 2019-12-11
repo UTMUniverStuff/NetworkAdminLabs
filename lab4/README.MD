@@ -69,7 +69,7 @@ A network interface is a software interface to networking hardware. Linux kernel
 
     Or run `/etc/init.d/networking restart`
 
-  4. Create a script with the following iptable rules:
+  4. Create & run a script with the following iptable rules:
   ~~~bash
   iptables -t nat -A POSTROUTING -o enp0s3 -j MASQUERADE
 
