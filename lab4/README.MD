@@ -50,19 +50,11 @@ A network interface is a software interface to networking hardware. Linux kernel
 
   In the file `/etc/network/interfaces` add:
   ~~~
-  # Configure enp0s3 to be a Dynamic Host Configuration Protocol
-  auto enp0s3
-  iface enp0s3 inet dhcp
-
   iface enp0s8 inet static
     address 100.0.0.10
 
   iface enp0s9 inet static
     address 200.0.0.20
-
-  # Create a loopback interface
-  auto lo
-  iface lo inet loopback
   ~~~
 
   3. To apply the changes, reboot - just to be safe
@@ -74,8 +66,9 @@ A network interface is a software interface to networking hardware. Linux kernel
   iptables -t nat -A POSTROUTING -o enp0s3 -j MASQUERADE
 
   iptables -A INPUT  -i enp0s8 -j ACCEPT
-  iptables -A INPUT  -i enp0s9 -j ACCEPT  
+  iptables -A INPUT  -i enp0s9 -j ACCEPT
   iptables -A INPUT  -i enp0s3 -m state --state ESTABLISHED,RELATED -j ACCEPT
+
   iptables -A OUTPUT -j ACCEPT
   ~~~
 
