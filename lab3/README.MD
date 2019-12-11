@@ -88,11 +88,14 @@ All files, both from user01 and user02 should be visible in `/samba/shared00`
 
 ### From windows
 1. Ubuntu and Windows must be on the same NAT Network:
+
 ![](./imgs/nat_network.png)
 
 2. To access the shared dir:
+
 ![](./imgs/goto_samba.png)
 
 
 ## Final result
+
 ![](./imgs/final.png)
