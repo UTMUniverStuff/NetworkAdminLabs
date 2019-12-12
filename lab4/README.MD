@@ -27,7 +27,9 @@ A network interface is a software interface to networking hardware. Linux kernel
 
   ![](./imgs/xps_network_config.png)
 
-  Each XP is in its own internal network. They should have no access to the internet
+  Each XP is in its own internal network. They should have no access to the internet.
+
+  **Disable the Firewall.**
 
 2. Setup a Ubuntu server with the following network configurations:
 
@@ -82,7 +84,7 @@ A network interface is a software interface to networking hardware. Linux kernel
 
 ### Final Result
 
-Both XP machines should be able to ping `www.google.com` and each other, like they are in the same network. (But for some reason, I can only ping xp00 from xp01 and can't ping xp01 from xp00).
+Both XP machines should be able to ping `www.google.com` and each other, like they are in the same network.
 
 ![](./imgs/final.png)
 
