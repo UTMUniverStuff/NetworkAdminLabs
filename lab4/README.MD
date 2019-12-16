@@ -89,6 +89,37 @@ Both XP machines should be able to ping `www.google.com` and each other, like th
 ![](./imgs/final.png)
 
 
+### Haha, if only it was so easy
+
+The teacher will ask you to manually reroute everything.
+
+`route -n`:
+
+![](./imgs/route-n.png)
+
+Remove all routes: `ip route flush table main`. `route -n` will be empty
+
+`ifconfig`:
+
+![](./imgs/ifconfig.png)
+
+Basically, u now want to restore all the routes. (Rebooting will restore them, but the teacher want you to do it manually).
+
+Make a script `route.sh` & and run:
+~~~bash
+route add default gw 10.0.2.15 enp0s3   # the ip from ifconfig
+route add default gw 10.0.2.2 enp0s3    # the ip from route -n
+ip route add 100.0.0.8/8 via 0.0.0.0 dev enp0s8
+ip route add 200.0.0.8/8 via 0.0.0.0 dev enp0s9
+ip route add 10.0.2.0/24 via 0.0.0.0 dev enp0s3
+ip route add 10.0.2.2/32 via 0.0.0.0 dev enp0s3
+~~~
+
+#### What happened
+After removing the routs, the 2 XPs won't have internet anymore. They won't be able to even ping each other.
+
+After adding the routes above, everything should get to normal.
+
 ## Conclusion
 
 In this laboratory work I learned about iptables, network interfaces and what tricks can be done with these.
