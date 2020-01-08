@@ -1189,6 +1189,26 @@ iptables -A OUTPUT -j ACCEPT</pre></div>
 <a id="user-content-final-result" class="anchor" href="#final-result" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Final Result</h3>
 <p>Both XP machines should be able to ping <code>www.google.com</code> and each other, like they are in the same network.</p>
 <p><a href="./imgs/final.png" target="_blank" rel="noopener noreferrer"><img src="./imgs/final.png" alt="" style="max-width:100%;"></a></p>
+<h3>
+<a id="user-content-haha-if-only-it-was-so-easy" class="anchor" href="#haha-if-only-it-was-so-easy" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Haha, if only it was so easy</h3>
+<p>The teacher will ask you to manually reroute everything.</p>
+<p><code>route -n</code>:</p>
+<p><a href="./imgs/route-n.png" target="_blank" rel="noopener noreferrer"><img src="./imgs/route-n.png" alt="" style="max-width:100%;"></a></p>
+<p>Remove all routes: <code>ip route flush table main</code>. <code>route -n</code> will be empty</p>
+<p><code>ifconfig</code>:</p>
+<p><a href="./imgs/ifconfig.png" target="_blank" rel="noopener noreferrer"><img src="./imgs/ifconfig.png" alt="" style="max-width:100%;"></a></p>
+<p>Basically, u now want to restore all the routes. (Rebooting will restore them, but the teacher want you to do it manually).</p>
+<p>Make a script <code>route.sh</code> &amp; and run:</p>
+<div class="highlight highlight-source-shell"><pre>route add default gw 10.0.2.15 enp0s3   <span class="pl-c"><span class="pl-c">#</span> the ip from ifconfig</span>
+route add default gw 10.0.2.2 enp0s3    <span class="pl-c"><span class="pl-c">#</span> the ip from route -n</span>
+ip route add 100.0.0.8/8 via 0.0.0.0 dev enp0s8
+ip route add 200.0.0.8/8 via 0.0.0.0 dev enp0s9
+ip route add 10.0.2.0/24 via 0.0.0.0 dev enp0s3
+ip route add 10.0.2.2/32 via 0.0.0.0 dev enp0s3</pre></div>
+<h4>
+<a id="user-content-what-happened" class="anchor" href="#what-happened" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>What happened</h4>
+<p>After removing the routs, the 2 XPs won't have internet anymore. They won't be able to even ping each other.</p>
+<p>After adding the routes above, everything should get to normal.</p>
 <h2>
 <a id="user-content-conclusion" class="anchor" href="#conclusion" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Conclusion</h2>
 <p>In this laboratory work I learned about iptables, network interfaces and what tricks can be done with these.</p>
