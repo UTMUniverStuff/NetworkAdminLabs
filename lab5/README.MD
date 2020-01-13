@@ -94,6 +94,11 @@ exit
  2. Then we configure the interfaces. `fa0/1` for example is an actual ethernet socket on the switch. So, we configure interfaces to allow only a specific VLAN. So, on `fa0/1` we will only allow VLAN101, so, we will connect the computer we want to be in VLAN101 to the `fa0/1` interface on the switch (cable).
  3. Then, we must connect the switches between them. We use `trunk`. I didn't understand this.
 
+### Cables
+ 1. Drag the smart cables, or whatever they are called.
+ 2. To check which interfaces are connected to, hover over the cable
+ 3. To connect to a specific interface, click on the green triangle and connect it again.
+
 ## Final result
 The computers in the same VLAN should be able to ping each other. It should not be able to ping PCs from other VLANs.
 
